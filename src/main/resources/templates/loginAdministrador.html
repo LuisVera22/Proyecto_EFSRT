@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        function validateForm(event) {
+            const email = document.querySelector('input[name="txtEmail"]').value;
+            const password = document.querySelector('input[name="txtContrasenia"]').value;
+            const alert = document.querySelector('.alerta-error');
+
+            if (!email || !password) {
+                alert.textContent = "Por favor, completa todos los campos.";
+                alert.style.display = "block";
+                event.preventDefault(); // Evita que el formulario se envíe
+            }
+        }
+    </script>
+</head>
+<body>
+			
+    <br><br><br><br><br><br><br>
+    <div class="loginContainer">
+    		
+        <div class="container-form register">
+            <div class="information">
+                <div class="info-childs">
+                    <div class="logo">
+                        <img th:src="@{/img/logo.png}" alt="Logo">
+                        <h2>¡Bienvenido!</h2>
+                    </div>
+                    <p>Para acceder a nuestra interfaz de Administrador, por favor inicia sesión con tus datos.</p>
+                </div>
+            </div>
+            
+			
+            <div class="form-information">
+                <div class="form-information-childs">
+                	<div th:if="${Invalido}" class="alert alert-danger" role="alert">
+						<span th:text="${Invalido}"></span>
+					</div>
+					
+                    <h2>Iniciar Sesión</h2>
+							
+		                    <form th:action="@{/}" method="post" th:object="${admin}" class="form form-login" novalidate onsubmit="validateForm(event)">
+		                    
+                        <input type="hidden" name="type" value="login">
+                        <div>
+                            <label>
+                                <i class='bx bx-envelope'></i>
+                                <input type="email" placeholder="Correo Electrónico" th:field="*{email}" required>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <i class='bx bx-lock-alt'></i>
+                                <input type="password" placeholder="Contraseña" th:field="*{contrasenia}" required>
+                            </label>
+                        </div>
+                        <input type="submit" value="Iniciar Sesión">
+                        <div class="alerta-error" style="display:none;"></div>
+                        <div class="alerta-exito" th:if="${success}" th:text="${success}"></div>
+                    </form>
+                    
+                    <!-- Botones adicionales -->
+                    <a th:href="@{/registrarAdmin}">¿Agregar Cuenta?</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .additional-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+         .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+    </style>
+</body>
+</html>

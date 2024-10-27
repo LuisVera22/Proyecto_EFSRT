@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles Libro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleU.css">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Lato&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+        referrerpolicy="no-referrer" />
+</head>
+<body style="background-color: #e3e9f7;">
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="">
+            <h1>Rincón Literario</h1>
+        </div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li><a th:href="@{/libro/listado}" style="text-decoration: none;">Catálogo</a></li>
+                <li><a th:href="@{/mantenimiento}" style="text-decoration: none;">Mantenimiento</a></li>
+                <li><a th:href="@{/reportes}" style="text-decoration: none;">Reportes</a></li>
+                <li><a href="#" class="active" style="text-decoration: none;">
+                    <img src="img/administrador.png" alt="Icono Admin"> 
+                    <span th:text="${session.NombreAdmin}"></span></a>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+    </header>
+    <br>
+    <div class="col-12 text-center">
+        <h3>Editar Datos Del Libro</h3>
+    </div>
+    <br>
+    <div class="container" style="background-color: white; border-radius: 2%; height: 10%; margin-top: 20px; padding: 10px; display: flex;">
+        <div id="carouselBooks" class="carousel-books carousel slide" data-bs-ride="false">
+            <div class="carousel-inner carousel-inner-books">
+                <div class="carousel-item-books active">
+                    <div class="card">
+                        <img th:src="@{img/libros/{isbn}.webp(isbn=${dataLibro.ISBN})}" 
+                             class="card-img-top" alt="Libro">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="container min-vh-100 d-flex align-items-center">
+                    <form th:action="@{/LibrosServlet}" method="post">
+                        <input type="hidden" name="type" value="edit">
+                        <div class="form-group">
+                            <label>ISBN:</label>
+                            <input class="form-control" type="text" name="txtISBN" th:value="${dataLibro.ISBN}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Título:</label>
+                            <input class="form-control" type="text" name="txtTitulo" th:value="${dataLibro.titulo}">
+                        </div>
+                        <div class="form-group">
+                            <label>Reseña:</label>
+                            <input class="form-control" type="text" name="txtResenia" th:value="${dataLibro.resenia}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Autor:</label>
+                            <select class="form-control" name="cboAutor">
+                                <option th:each="autor : ${listAutores}" 
+                                        th:value="${autor.IDAutor}" 
+                                        th:text="${autor.nombreAutor + ' ' + autor.apellidoAutor}" 
+                                        th:selected="${autor.IDAutor == dataLibro.IDAutor}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Editorial:</label>
+                            <select class="form-control" name="cboEditorial">
+                                <option th:each="editorial : ${listEditoriales}" 
+                                        th:value="${editorial.IDEditorial}" 
+                                        th:text="${editorial.nombreEditorial}" 
+                                        th:selected="${editorial.IDEditorial == dataLibro.IDEditorial}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de Publicación:</label>
+                            <input class="form-control" type="date" name="txtFechaPublicacion" th:value="${dataLibro.fechaPublicacion}">
+                        </div>
+                        <div class="form-group">
+                            <label>Precio (S/.):</label>
+                            <input class="form-control" type="number" name="txtPrecio" min="1" step="0.01" th:value="${dataLibro.precio}">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock:</label>
+                            <input class="form-control" type="number" name="txtStock" min="1" th:value="${dataLibro.stock}">
+                        </div>
+                        <div class="form-group">
+                            <label>Restricción de Edad:</label>
+                            <input class="form-control" type="number" name="txtRestriccion" min="0" th:value="${dataLibro.restriccionEdad}">
+                        </div>
+                        <br>
+                        <input type="submit" class="btn btn-warning" value="Actualizar">
+                        <button type="button" class="btn btn-danger" th:onclick="|location.href='@{/LibrosServlet?type=delete}'|">Eliminar</button>
+                        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/LibrosServlet?type=list}'|">Regresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

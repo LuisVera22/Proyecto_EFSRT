@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        header img {
+            height: 60px;
+        }
+        header .company-info h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .date {
+            text-align: right;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 0.95em;
+        }
+        table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        table tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        .subtotal {
+            text-align: right;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+        .signature {
+            margin-top: 50px;
+            text-align: left;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .signature img {
+            height: 70px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn-icons-png.flaticon.com/512/4277/4277086.png" alt="Company Logo">
+        <div class="company-info">
+            <h2>Inventario de Libros</h2>
+        </div>
+    </header>
+
+    <div class="date">
+        <p th:text="${#dates.format(new java.util.Date(), 'dd/MM/yyyy')}">19/06/2024</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Título</th>
+                <th>Stock</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="libro : ${libros}">
+                <td th:text="${libro.ISBN}">ISBN de Ejemplo</td>
+                <td th:text="${libro.titulo}">Titulo</td>
+                <td th:text="${libro.stock}">Disponible</td>
+                <td th:text="${libro.precio}">Precio</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="signature">
+        <img src="https://cdn.shopify.com/s/files/1/0594/4639/5086/files/Line_Through_Name.jpg" alt="Firma">
+        <p>Rincón Literario</p>
+    </div>
+
+    <footer>
+        <p>© 2024 Rincón Literario. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

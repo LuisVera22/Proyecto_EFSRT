@@ -1,0 +1,118 @@
+@charset "ISO-8859-1";
+
+#content-wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#content {
+	flex: 1;
+}
+
+.container {
+	padding: 20px;
+	margin: 0 auto;
+}
+
+h3 {
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary {
+    color: #007bff;
+    border: 2px solid #007bff;
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.btn-outline-warning {
+    color: #ffc107;
+    border: 2px solid #ffc107;
+    background-color: transparent;
+}
+
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #ffc107;
+}
+
+.btn-outline-danger {
+    color: rgb(255, 0, 0);
+    border: 2px solid rgb(255, 0, 0);
+    background-color: transparent;
+}
+
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: rgb(255, 0, 0);
+}
+
+
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	background-color: #f9f9f9;
+}
+
+.table thead {
+	color: white;
+}
+
+.table th {
+	padding: 12px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+	background-color: #ddd;
+}
+
+.table td {
+	padding: 12px;
+	border-bottom: 1px solid #ddd;
+}
+
+.StockAgotado {
+    background-color: #F88375;
+}
+
+.AlertaStock {
+    background-color: #F8BC75;
+}
+
+.table a img {
+	margin-right: 5px;
+	cursor: pointer;
+	transition: transform 0.2s;
+}
+
+.table a img:hover {
+	transform: scale(1.1);
+}
+
+.row div {
+	margin-bottom: 20px;
+}

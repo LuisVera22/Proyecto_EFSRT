@@ -1,0 +1,72 @@
+
+
+nav {
+    background-color: #333; 
+    color: white;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    padding: 0.5em 1em; 
+    z-index: 1000; 
+}
+nav ul {
+    list-style: none; 
+    margin: 0; 
+    padding: 0;
+    display: flex; /* Los elementos estarán en línea horizontal */
+    justify-content: space-between; /* Espacio entre los elementos */
+    align-items: center; /* Alinea los elementos verticalmente */
+}
+
+/* Estilo para los elementos de la lista */
+nav li {
+    margin-right: 1em; 
+}
+
+nav a {
+    color: white;
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+nav form {
+    display: flex; 
+}
+
+nav input[type="text"] {
+    padding: 0.5em;
+    border: none;
+    border-radius: 5px;
+}
+
+nav button {
+    padding: 0.5em;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+}
+
+.registroLibro{
+	background-color:black;
+}
+
+body {
+    margin-top: 70px; 
+}
+*{
+    font-family: "LXGW WenKai TC", cursive;
+    font-weight: 400;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+#logo {
+    width: 50px; 
+    height: auto; 
+}

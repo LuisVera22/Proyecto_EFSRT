@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Página de Libros</title>
+    <link rel="stylesheet" href="/css/libros.css"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<nav>
+    <img th:src="@{/img/logo.png}" id="logo" alt="Logo">
+    <h3 class="text text-center" id="titulo">Rincón Literario</h3>
+    <ul>
+        <li>
+            
+        </li>
+    </ul>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<body>
+
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <div>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#agregarProductoModal">
+                Registrar Libro
+            </button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#agregarCategoriaModal">
+                Agregar Categoría
+            </button>
+        </div>
+        <div>
+            <a th:href="@{/libro/registrar}" class="btn btn-primary">Generar PDF</a>
+        </div>
+    </div>
+    <table class="table mt-4">
+        <thead>
+        <tr>
+        	<th>Imagen</th>
+            <th>ISBN</th>
+            <th>Título de libro</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Fecha de Publicación</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+        <tbody>
+            <tr th:each="libro : ${libros}">
+            	<td th:text="${libro.urlImagen}"></td>
+                <td th:text="${libro.ISBN}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.precio}"></td>
+                <td th:text="${libro.stock}"></td>
+                <td th:text="${libro.Fechapublicacion}"></td>
+                <td th:text="${libro.autorEntity.nombreAutor}"></td>
+                <td th:text="${libro.editorialEntity.nombreEditorial}"></td>
+              
+				<td>
+    				<ul>
+				        <li th:each="categoria : ${categorias}">
+				            <span th:text="${categoria.nombreCategoria}"></span>
+				        </li>
+				    </ul>
+				</td>
+            	<td>
+
+                    <a th:href="@{/libro/verLibro/{ISBN}(ISBN=${libro.ISBN})}" class="btn btn-info">Ver</a>
+                    <a th:href="@{/libro/editar/{ISBN}(ISBN=${libro.ISBN})}" class="btn btn-info">Editar</a>
+                    <a th:href="@{/libro/eliminar/{ISBN}(ISBN=${libro.ISBN})}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal para Agregar Producto -->
+<div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog" aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarProductoModalLabel">Agregar nuevo Libro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/libro/registrar}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" class="form-control" id="isbn" name="isbn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="titulo">Título del libro</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Fechapublicacion">Fecha de Publicación</label>
+                        <input type="date" id="Fechapublicacion" name="Fechapublicacion" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoriaEntity">Categoría</label>
+                        <select class="form-control" id="categoriaEntity" name="categoriaEntity">
+                            <option th:each="categoria : ${categorias}"
+                                    th:value="${categoria.idCategoria}"
+                                    th:text="${categoria.nombreCategoria}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFilel">Imagen del Libro</label>
+                        <input name="foto" accept="image/*" required type="file" class="form-control-file" id="exampleFormControlFilel">
+                    </div>
+                    <div class="form-group">
+                        <label for="autorEntity">Autor</label>
+                        <select class="form-control" id="autorEntity" name="autorEntity">
+                            <option th:each="autor : ${autores}"
+                                    th:value="${autor.idAutor}"
+                                    th:text="${autor.nombreAutor}">
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Agregar Categoría -->
+<div class="modal fade" id="agregarCategoriaModal" tabindex="-1" role="dialog" aria-labelledby="agregarCategoriaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarCategoriaModalLabel">Agregar Categoría</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/categoria/registrar}" method="post">
+                    <div class="form-group">
+                        <label for="nombreCategoria">Nombre de la Categoría</label>
+                        <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria" required>
+                    </div>
+                    <!-- Agrega más campos según sea necesario -->
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

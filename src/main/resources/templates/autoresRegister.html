@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Autor</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/registrarLibro.css}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img th:src="@{/img/logo.png}" alt="Logo">
+            <h1>Rincón Literario</h1>
+        </div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li><a th:href="@{/libro/listado}" style="text-decoration: none;">Catálogo</a></li>
+                <li><a th:href="@{/mantenimiento}" style="text-decoration: none;">Mantenimiento</a></li>
+                <li><a th:href="@{/reportes}" style="text-decoration: none;">Reportes</a></li>
+                <li>
+                    <a href="#" class="active" style="text-decoration: none;">
+                        <img th:src="@{/img/administrador.png}" alt="Icono Admin"> 
+                       
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            
+        </label>
+    </header>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Registrar Autor</h3>
+                    </div>
+                    <div class="container min-vh-100 d-flex justify-content-center align-items-center">
+                        <form th:action="@{/autor/registrar}" th:object="${autor}" method="post" onsubmit="return validarFormulario()">
+                            <div class="form-group">
+                                <label for="nombreAutor">Nombres:</label>
+                                <input class="form-control" type="text" th:field="*{nombreAutor}" name="txtNombres" id="txtNombres">
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoAutor">Apellidos:</label>
+                                <input class="form-control" type="text" th:field="*{apellidoAutor}" name="txtApellidos" id="txtApellidos">
+                            </div>
+                            <a th:href="@{/autor/listado}" class="btn btn-primary">Regresar</a>
+                            
+                            <button type="submit" class="btn btn-success">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validarFormulario() {
+            var nombres = document.getElementById('txtNombres').value.trim();
+            var apellidos = document.getElementById('txtApellidos').value.trim();
+
+            if (nombres === '' || apellidos === '') {
+                alert('Por favor, complete todos los campos.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

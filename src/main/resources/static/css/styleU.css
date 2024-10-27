@@ -1,0 +1,154 @@
+@charset "ISO-8859-1";
+
+.modal-content {
+    margin: 0 auto; 
+    padding: 20px; 
+    max-width: 80%; 
+  }
+
+.carrusel{
+    max-width: 1200px;
+    margin: 50px auto 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.carousel-inner{
+    border-radius: 20px;
+}
+
+
+.carousel-control-prev,
+    .carousel-control-next {
+        
+        font-size: 2rem; 
+        color: white; 
+
+    }
+
+/* Estilos para el carrusel de libros */
+    .carousel-books {
+    
+      overflow: hidden; 
+    }
+    .carousel-inner-books {
+      display: flex;
+      
+      
+    }
+    .carousel-item-books {
+      flex: 0 0 18rem; 
+      margin-right: 10px; 
+    }
+    
+    .titulo {
+      font-weight: bold; 
+ 		 margin-left: 280px;   
+    } 
+
+    
+   
+
+
+    .header-container {
+    position: relative;
+    z-index: 10; 
+}
+    
+    
+    /*=================================================*/
+
+footer{  
+    color: #000000d7;
+    font-family: Verdana, Geneva, sans-serif;  
+
+}
+
+.container__footer{   
+    display: flex;
+    max-width: 1200px;
+    margin: auto ;  
+
+    padding: 0px 280px;
+    
+}
+
+.box__footer{   
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+   
+}
+
+
+
+.box__footer .terms{
+    max-width: 350px;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.box__footer h2{   
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.box__footer a{
+    text-decoration: none;
+    margin-top: 10px;
+    color: #000000b9;
+    font-weight: 600;
+}
+
+.box__footer a:hover{
+    color: #e41111f5;
+}
+
+.box__footer a .fab{
+    font-size: 20px;
+}
+
+.box__copyright{
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 0px 40px;
+}
+
+.box__copyright p{
+    margin-top: 20px;
+   
+}
+
+.box__copyright hr{
+    border: none;
+    height: 1px;
+    
+}
+
+.terms h2{
+	font-size: 18px;
+	font-family: Tahoma;  
+}
+.terms p{
+	font-size: 15px;
+	font-family: Tahoma;  
+}
+
+
+#slogan {
+    border-radius: 20px;
+}
+
+#slogan:hover {
+    margin: 20px 80px;
+    height: 550px;
+    width: 75%;
+}
+
+.btn-outline-danger,
+
+.btn-outline-info {
+    margin-right: 10px; 
+    margin-left: 10px; 
+}
