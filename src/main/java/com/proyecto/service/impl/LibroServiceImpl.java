@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.model.Inventario;
 import com.proyecto.model.LibroEntity;
+import com.proyecto.repository.EditorialRepository;
 import com.proyecto.repository.LibroRepository;
 import com.proyecto.service.LibroService;
 import com.proyecto.utils.Utilitarios;
@@ -23,6 +24,8 @@ import lombok.RequiredArgsConstructor;
 public class LibroServiceImpl implements LibroService{
 	@Autowired
 	private LibroRepository libroRepository;
+    @Autowired
+    private EditorialRepository editorialRepository;
 
 
     @Override

@@ -23,10 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.model.AutorEntity;
 import com.proyecto.model.CategoriaEntity;
+import com.proyecto.model.EditorialEntity;
 import com.proyecto.model.LibroCategoriaEntity;
 import com.proyecto.model.LibroEntity;
+import com.proyecto.repository.EditorialRepository;
 import com.proyecto.service.AutorService;
 import com.proyecto.service.CategoriaService;
+import com.proyecto.service.EditorialService;
 import com.proyecto.service.LibroCategoriaService;
 import com.proyecto.service.LibroService;
 import com.proyecto.service.impl.PdfService;
@@ -39,6 +42,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/libro")
 public class LibroController {
 	
+	@Autowired
+    private EditorialRepository editorialRepository;
+	@Autowired
+	private final EditorialService editorialService;
 	@Autowired
     private final LibroService libroService;
 	@Autowired
@@ -56,6 +63,7 @@ public class LibroController {
     	List<CategoriaEntity> listarCategorias= categoriaService.listadoCategorias();
         List<LibroEntity> listaLibros = libroService.listadoLibros();
         model.addAttribute("categorias", listarCategorias);
+		model.addAttribute("editoriales", editorialRepository.findAll());
         model.addAttribute("libros", listaLibros);
         return "catalogoAdmi"; 
     }
@@ -64,10 +72,12 @@ public class LibroController {
         
         List<AutorEntity> listarAutores = autorService.listadoAutores();
         List<CategoriaEntity> listarCategoriaLibros = categoriaService.listadoCategorias();
+		List<EditorialEntity> listadoEditorial = editorialService.listadoEditoriales();
         List<LibroCategoriaEntity> litarListas = libroCategoriaService.listarTodosCategoriaLibro();
 
         model.addAttribute("autores", listarAutores);
         model.addAttribute("categorias", listarCategoriaLibros);
+		model.addAttribute("editoriales", listadoEditorial);
         model.addAttribute("libro", new LibroEntity()); 
         return "pagLibros";
     }

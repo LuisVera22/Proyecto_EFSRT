@@ -8,22 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<body>
+    <br><br><br><br><br><br>
 <nav>
     <img th:src="@{/img/logo.png}" id="logo" alt="Logo">
-    <h3 class="text text-center" id="titulo">Rincón Literario</h3>
-    <ul>
-        <li>
-            
-        </li>
-    </ul>
+    <h3 class="text-center" id="titulo">Rincón Literario</h3>
 </nav>
-<br>
-<br>
-<br>
-<br>
-<body>
-
-
 <div class="container mt-4">
     <div class="d-flex justify-content-between">
         <div>
@@ -41,7 +31,7 @@
     <table class="table mt-4">
         <thead>
         <tr>
-        	<th>Imagen</th>
+            <th>Imagen</th>
             <th>ISBN</th>
             <th>Título de libro</th>
             <th>Precio</th>
@@ -52,27 +42,25 @@
             <th>Categoría</th>
             <th>Acciones</th>
         </tr>
-    </thead>
+        </thead>
         <tbody>
             <tr th:each="libro : ${libros}">
-            	<td th:text="${libro.urlImagen}"></td>
+                <td><img th:src="@{/img/libros/{urlImagen}(urlImagen=${libro.urlImagen})}" alt="Imagen del Libro" width="50" height="50"></td>
                 <td th:text="${libro.ISBN}"></td>
                 <td th:text="${libro.titulo}"></td>
                 <td th:text="${libro.precio}"></td>
                 <td th:text="${libro.stock}"></td>
-                <td th:text="${libro.Fechapublicacion}"></td>
+                <td th:text="${#dates.format(libro.Fechapublicacion, 'yyyy-MM-dd')}"></td>
                 <td th:text="${libro.autorEntity.nombreAutor}"></td>
                 <td th:text="${libro.editorialEntity.nombreEditorial}"></td>
-              
-				<td>
-    				<ul>
-				        <li th:each="categoria : ${categorias}">
-				            <span th:text="${categoria.nombreCategoria}"></span>
-				        </li>
-				    </ul>
-				</td>
-            	<td>
-
+                <td>
+                    <ul>
+                        <li th:each="categoria : ${libro.categorias}">
+                            <span th:text="${categoria.nombreCategoria}"></span>
+                        </li>
+                    </ul>
+                </td>
+                <td>
                     <a th:href="@{/libro/verLibro/{ISBN}(ISBN=${libro.ISBN})}" class="btn btn-info">Ver</a>
                     <a th:href="@{/libro/editar/{ISBN}(ISBN=${libro.ISBN})}" class="btn btn-info">Editar</a>
                     <a th:href="@{/libro/eliminar/{ISBN}(ISBN=${libro.ISBN})}" class="btn btn-danger">Eliminar</a>
@@ -81,6 +69,7 @@
         </tbody>
     </table>
 </div>
+
 <!-- Modal para Agregar Producto -->
 <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog" aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -110,29 +99,29 @@
                         <input type="number" class="form-control" id="stock" name="stock" required>
                     </div>
                     <div class="form-group">
-                        <label for="Fechapublicacion">Fecha de Publicación</label>
-                        <input type="date" id="Fechapublicacion" name="Fechapublicacion" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="categoriaEntity">Categoría</label>
-                        <select class="form-control" id="categoriaEntity" name="categoriaEntity">
-                            <option th:each="categoria : ${categorias}"
-                                    th:value="${categoria.idCategoria}"
-                                    th:text="${categoria.nombreCategoria}">
-                            </option>
+                        <label for="editorialEntity">Editorial</label>
+                        <select class="form-control" id="editorialEntity" name="editorialEntity" required>
+                            <option th:each="editorial : ${editoriales}" th:value="${editorial.idEditorial}" th:text="${editorial.nombreEditorial}"></option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlFilel">Imagen del Libro</label>
-                        <input name="foto" accept="image/*" required type="file" class="form-control-file" id="exampleFormControlFilel">
+                        <label for="Fechapublicacion">Fecha de Publicación</label>
+                        <input type="date" id="Fechapublicacion" name="Fechapublicacion" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoriaEntity">Categoría</label>
+                        <select class="form-control" id="categoriaEntity" name="categoriaEntity" required>
+                            <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}" th:text="${categoria.nombreCategoria}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto">Imagen del Libro</label>
+                        <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" required>
                     </div>
                     <div class="form-group">
                         <label for="autorEntity">Autor</label>
-                        <select class="form-control" id="autorEntity" name="autorEntity">
-                            <option th:each="autor : ${autores}"
-                                    th:value="${autor.idAutor}"
-                                    th:text="${autor.nombreAutor}">
-                            </option>
+                        <select class="form-control" id="autorEntity" name="autorEntity" required>
+                            <option th:each="autor : ${autores}" th:value="${autor.idAutor}" th:text="${autor.nombreAutor}"></option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -158,7 +147,6 @@
                         <label for="nombreCategoria">Nombre de la Categoría</label>
                         <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria" required>
                     </div>
-                    <!-- Agrega más campos según sea necesario -->
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>

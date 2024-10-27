@@ -2,6 +2,7 @@ package com.proyecto.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.model.EditorialEntity;
@@ -14,7 +15,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EditorialServiceImpl implements EditorialService {
     
-    private EditorialRepository editorialRepository;
+    @Autowired
+    private final EditorialRepository editorialRepository;
 
     @Override
     public List<EditorialEntity> listadoEditoriales() {
