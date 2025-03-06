@@ -1,2 +1,5 @@
 # Proyecto_EFSRT
-Aplicativo Web para administración de una Tienda de Libros. Desarrollada en SpringBoot.
+
+Aplicativo Web para administración de una Tienda de Libros.
+
+> Proyecto SpringBoot + MySql.
